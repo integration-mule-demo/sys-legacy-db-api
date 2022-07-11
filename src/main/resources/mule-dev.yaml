@@ -4,7 +4,9 @@ tls:
   key: "![3lEumFBKcKU=]"
   pwd: "![3lEumFBKcKU=]"
 
-salesforce:
-  user:  "![drKpu7GgG+uZSfWEKGDYT+iHf0NLQuDpFrk6UR1Lbsw=]"
-  pwd:  "$3cur3Password"
-  token:  "![g7P6CqL9Bry5YBUF7biicrQ11maKoN73qeEl3PdaaL8=]"
+database:
+  host: "![F+5kG8IDPEDamqS/ZBEzxPzNoh5qknJOVIrmweIkr4jAYsSDK2N8St80Io3F5d21PGK9/K0tJt4=]"
+  port: "![3J58cGTYz08=]"
+  user:  "![6crTU8K317u9LZxs3DQlJA==]"
+  pwd:  "![4q8TigrI2mHbuldLCkR6Dg==]"
+  db:  "![0aA/qVvlIqvlmwrqXvlcrA==]"
