@@ -61,4 +61,36 @@ output application/json
 }]]]></json-logger:content>
 		</json-logger:logger>
 	</sub-flow>
+	<sub-flow name="patch-prospect-subflow" doc:id="588d9afa-8858-4a9d-9d8c-3e18604bf8ed" >
+		<json-logger:logger doc:name="Start" doc:id="051446c1-676c-41e4-9ce1-3c7c5ce8d5fe" config-ref="JSON_Logger_Config" message="Starting update on db legacy flow" />
+		<set-variable value="#[attributes.uriParams.'ID']" doc:name="Set prospectId" doc:id="1c517a9a-7102-4e2a-9843-15fdc8ce5821" variableName="prospectId"/>
+		<set-variable value="#[payload.externalId]" doc:name="Set externalId" doc:id="ba3e3288-3738-4c7f-84d1-61f100b09f07" variableName="externalId"/>
+		<db:update doc:name="Update" doc:id="00079cec-7bbc-4c32-884e-e4878b52db0e" config-ref="Database_Config">
+			<db:sql ><![CDATA[UPDATE `demo-mulesoft`.`Customer`
+SET
+`ExternalId` = :external
+WHERE `idCustomer` = :id;
+]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	external: vars.externalId, 
+	id: vars.prospectId
+}]]]></db:input-parameters>
+		</db:update>
+		<ee:transform doc:name="Format Output" doc:id="ea23ddc2-b787-499b-9055-3387afba42fb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "Prospect Updated Successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="End" doc:id="8d6ab4c8-6bb3-4dd0-8401-75d5bf057895" config-ref="JSON_Logger_Config" message="Finishing flow" tracePoint="END" >
+			<json-logger:content ><![CDATA[#[import modules::JSONLoggerModule output application/json ---
+{
+    payload: ''
+}]]]></json-logger:content>
+		</json-logger:logger>
+	</sub-flow>
 </mule>
